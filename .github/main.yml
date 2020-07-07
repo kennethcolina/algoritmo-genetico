@@ -1,0 +1,25 @@
+name: Main dev
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set Node.js 10.x
+        uses: actions/setup-node@master
+        with:
+          node-version: 10.x
+
+      - name: Install dependencies
+        working-directory: ./
+        run: npm install
+
+      - name: Run tests
+        working-directory: ./
+        run: npm run test
+        env:
+          NODE_ENV: dev
